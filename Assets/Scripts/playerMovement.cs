@@ -12,8 +12,11 @@ public class playerMovement : MonoBehaviour
     {
         if (Time.timeScale == 1)
         {
-            forwardForce += 0.4f;
-            rb.AddForce(0,0,forwardForce*Time.deltaTime);
+            if (name=="Player")
+            {
+                forwardForce += 0.4f;
+                rb.AddForce(0,0,forwardForce*Time.deltaTime);
+            }
 
             float touchPosition = -1f;
             //Mobile controls
@@ -23,7 +26,7 @@ public class playerMovement : MonoBehaviour
             }
 
             //Right move
-            if (Input.GetKey("d") || touchPosition > 399)
+            if ((name=="Player" && Input.GetKey("d")) || (name=="Player2" && Input.GetKey("right")) || touchPosition > 399)
             {
                 if (isGrounded)
                     rb.AddForce(70*Time.deltaTime,0,0,ForceMode.VelocityChange);
@@ -31,7 +34,8 @@ public class playerMovement : MonoBehaviour
                     rb.AddForce(10*Time.deltaTime,0,0,ForceMode.VelocityChange);
             }
             //Left move
-            if (Input.GetKey("a") || (touchPosition < 201 && touchPosition > -1))
+            if ((name=="Player" && Input.GetKey("a")) || (name=="Player2" && Input.GetKey("left"))
+                || (touchPosition < 201 && touchPosition > -1))
             {
                 if (isGrounded)
                     rb.AddForce(-70*Time.deltaTime,0,0,ForceMode.VelocityChange);
@@ -39,7 +43,8 @@ public class playerMovement : MonoBehaviour
                     rb.AddForce(-10*Time.deltaTime,0,0,ForceMode.VelocityChange);
             }
             //Jump
-            if (isGrounded && (Input.GetKey("space") || (touchPosition > 201 && touchPosition < 399)))
+            if (isGrounded && ((name=="Player" && Input.GetKey("space")) || (name=="Player2" && Input.GetKey("up"))
+                || (touchPosition > 201 && touchPosition < 399)))
             {
                 rb.AddForce(0,300*Time.deltaTime,0,ForceMode.VelocityChange);
             }

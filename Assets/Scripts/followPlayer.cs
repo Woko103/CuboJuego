@@ -9,7 +9,9 @@ public class followPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("c"))
+        bool twoMode = FindObjectOfType<gameManager>().twoMode;
+
+        if (Input.GetKeyDown("c") && !twoMode)
         {
             if (thirdPerson)
             {
@@ -20,9 +22,10 @@ public class followPlayer : MonoBehaviour
                 thirdPerson = true;
             }
         }
-        if (thirdPerson) //Tercera persona
+
+        if (thirdPerson)
             transform.position = player.position + offset;
-        else //Primera persona
+        else //First person
             transform.position = player.position;
     }
 }

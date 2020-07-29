@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
+    public bool twoMode;
     public Text score;
     bool gameHasEnded = false;
 
